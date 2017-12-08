@@ -203,7 +203,6 @@ class LKFlowNodelet : public opencv_apps::Nodelet
         }
         points[1].resize(k);
       }
-
       if( addRemovePt && points[1].size() < (size_t)MAX_COUNT )
         {
           std::vector<cv::Point2f> tmp;
@@ -234,6 +233,9 @@ class LKFlowNodelet : public opencv_apps::Nodelet
             nightMode = !nightMode;
             break;
         }
+      }
+      if(points[1].size() < 200){
+        needToInit = true;
       }
       std::swap(points[1], points[0]);
       cv::swap(prevGray, gray);
